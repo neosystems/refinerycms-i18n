@@ -187,29 +187,7 @@ module Refinery
 
     end
 
-    @built_in_locales = {
-      :en => 'English',
-      :fr => 'Français',
-      :nl => 'Nederlands',
-      :'pt-BR' => 'Português',
-      :da => 'Dansk',
-      :nb => 'Norsk Bokmål',
-      :sl => 'Slovenian',
-      :es => 'Español',
-      :it => 'Italiano',
-      :de => 'Deutsch',
-      :lv => 'Latviski',
-      :ru => 'Русский',
-      :sv => 'Svenska',
-      :pl => 'Polski',
-      :'zh-CN' => 'Simplified Chinese',
-      :'zh-TW' => 'Traditional Chinese',
-      :el => 'Ελληνικά',
-      :rs => 'Srpski',
-      :cs => 'Česky',
-      :sk => 'Slovenský',
-      :jp => '日本語'
-    }
+    @built_in_locales = { :en => 'English', :es => 'Español' }
   end
 end
 
