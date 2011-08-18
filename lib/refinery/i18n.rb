@@ -45,7 +45,7 @@ module Refinery
             end
           end
 
-          prepend_before_filter :find_or_set_locale
+          #prepend_before_filter :find_or_set_locale
           protected :default_url_options, :find_or_set_locale
         end
 
@@ -60,15 +60,15 @@ module Refinery
           end
 
           def globalize!
-            if ::Refinery::I18n.frontend_locales.any?
-              if params[:switch_locale]
-                Thread.current[:globalize_locale] = params[:switch_locale].to_sym
-              elsif ::I18n.locale != ::Refinery::I18n.default_frontend_locale
-                Thread.current[:globalize_locale] = ::Refinery::I18n.default_frontend_locale
-              end
-            end
+            #if ::Refinery::I18n.frontend_locales.any?
+            #  if params[:switch_locale]
+            #    Thread.current[:globalize_locale] = params[:switch_locale].to_sym
+            #  elsif ::I18n.locale != ::Refinery::I18n.default_frontend_locale
+            #    Thread.current[:globalize_locale] = ::Refinery::I18n.default_frontend_locale
+            #  end
+            #end
 
-            Thread.current[:globalize_locale] = ::I18n.locale if Thread.current[:globalize_locale].nil?
+            Thread.current[:globalize_locale] = ::I18n.locale #if Thread.current[:globalize_locale].nil?
           end
           # globalize! should be prepended first so that it runs after find_or_set_locale
           prepend_before_filter :globalize!, :find_or_set_locale
@@ -101,13 +101,15 @@ module Refinery
       end
 
       def current_locale
-        unless enabled?
-          ::Refinery::I18n.current_locale = ::Refinery::I18n.default_locale
-        else
-          RefinerySetting.find_or_set(:i18n_translation_current_locale, ::Refinery::I18n.default_locale, {
-            :scoping => 'refinery'
-          }).to_sym
-        end
+        ::I18n.locale
+        
+        #unless enabled?
+        #  ::Refinery::I18n.current_locale = ::Refinery::I18n.default_locale
+        #else
+        #  RefinerySetting.find_or_set(:i18n_translation_current_locale, ::Refinery::I18n.default_locale, {
+        #    :scoping => 'refinery'
+        #  }).to_sym
+        #end
       end
 
       def current_locale=(locale)

@@ -10,7 +10,7 @@ module RoutingFilter
           end
           path.sub!(%r{^$}) { '/' }
         else
-          ::I18n.locale = ::Refinery::I18n.default_frontend_locale
+          ::I18n.locale = ::I18n.default_locale
         end
       end
 
@@ -24,14 +24,15 @@ module RoutingFilter
       locale = params.delete(:locale) || ::I18n.locale
 
       yield.tap do |result|
-        if ::Refinery::I18n.enabled? and
-           locale != ::Refinery::I18n.default_frontend_locale and
-           result !~ %r{^/(refinery|wymiframe)}
+        if false and
+           locale != ::I18n.default_locale and
+           result !~ %r{^/(wymiframe)} and
+           Rails.env.development?
           result.sub!(%r(^(http.?://[^/]*)?(.*))) { "#{$1}/#{locale}#{$2}" }
         end
 
         result
-      end
+      end 
     end
 
   end
